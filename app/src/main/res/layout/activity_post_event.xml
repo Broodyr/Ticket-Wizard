@@ -1,9 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PostEvent"
-    android:background="@drawable/bg">
+    android:background="@drawable/bg"
+    android:orientation="vertical">
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:minHeight="48dp"
+        android:orientation="horizontal"
+        android:background="@drawable/paragraph">
+
+        <ImageView
+            android:id="@+id/back"
+            android:maxHeight="48dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/arrow"
+            android:layout_weight="1"
+            android:onClick="back"
+            android:padding="8dp"/>
+
+        <EditText
+            android:id="@+id/enterEvent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="@string/enterEvent"
+            android:layout_weight="4"
+            android:inputType="text"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorLight"
+            android:textSize="12pt"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:text="$20.00 ea"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorLight"
+            android:textSize="12pt"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:text="Oct. 7"/>
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/paragraph"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:height="128dp"
+            android:textColor="@color/colorLight"
+            android:background="@drawable/paragraph"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:scrollbars="vertical"
+            android:scrollbarTrackVertical="@color/colorDark"
+            android:scrollbarThumbVertical="@color/colorPrimary"
+            android:text="Lorem \nipsum \ndolor \ns\nit\n amet, \nco\ns\nec\ntotur\n alit\n adisa\n seign \nsad \ndo"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/simple_button"
+                android:textColor="@color/colorLight"
+                android:textSize="12pt"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:text="+"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/simple_button"
+                android:textColor="@color/colorLight"
+                android:textSize="12pt"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:text="-"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/border"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/colorLight"
+            android:textSize="12pt"
+            android:text="1 x $19.99"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="8"
+            android:background="@drawable/simple_button"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/colorLight"
+            android:text="@string/purchase"/>
+    </LinearLayout>
+
+</LinearLayout>
