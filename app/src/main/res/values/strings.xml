@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Ticket Wizard</string>
+
+    <!-- Main Page -->
+    <string name="browse">Browse</string>
+    <string name="postEvent">Post Event</string>
+    <string name="search">Search Here..</string>
+
+    <!-- Browse Events Page -->
+    <string name="cat">Categories:</string>
+    <string-array name="categories">
+        <item>Music</item>
+        <item>Sports</item>
+        <item>Food</item>
+        <item>Theatre</item>
+        <item>Fun</item>
+        <item>Markets</item>
+        <item>Networking</item>
+    </string-array>
+    <string name="home">Homescreen</string>
+    <string name="kids">Kids?</string>
+
+    <!-- Specific Event Page -->
+    <string name="purchase">Purchase</string>
+    <string name="edit">Edit</string>
+    <string name="remove">Remove</string>
+    <string name="select">Please select 1+ tickets.</string>
+
+    <!-- Confirm Order Page -->
+    <string name="confirmOrder">Confirm Order:</string>
+    <string name="event">Event:</string>
+    <string name="tickets">Tickets:</string>
+    <string name="totalPrice">Total Price:</string>
+    <string name="payMethod">Payment Method:</string>
+    <string-array name="payMethods">
+        <item>Credit Card</item>
+        <item>PayPal</item>
+        <item>Bitcoin</item>
+    </string-array>
+    <string name="mustPay">You must select a payment method.</string>
+    <string name="payCC">Credit Card:</string>
+    <string-array name="payCCType">
+        <item>Visa</item>
+        <item>Mastercard</item>
+        <item>Amex</item>
+    </string-array>
+    <string name="back">Back</string>
+    <string name="confirm">Confirm</string>
+    <string name="thanks">Thank you!\nYour total:</string>
+
+    <!-- Add/Edit Event Page -->
+    <string name="enterEvent">Enter Event Name..</string>
+    <string name="addImage">Add Image..</string>
+    <string name="price">Price:</string>
+    <string name="date">Date:</string>
+    <string name="desc">Description:</string>
+    <string name="upload">Upload</string>
+    <string name="uploaded">Uploaded!</string>
+
+
+</resources>

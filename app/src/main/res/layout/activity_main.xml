@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/bg">
+
+    <ImageView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo_glow"
+        android:elevation="2dp"/>
+
+    <Button
+        android:id="@+id/browse"
+        android:onClick="browse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/browse"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="96dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button"
+        android:textColor="@color/colorLight"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        android:padding="24dp"
+        android:paddingStart="64dp"
+        android:paddingEnd="64dp"/>
+
+    <Button
+        android:id="@+id/postEvent"
+        android:onClick="postEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/postEvent"
+        android:layout_below="@id/browse"
+        android:layout_marginTop="64dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button"
+        android:textColor="@color/colorLight"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        android:padding="24dp"
+        android:paddingStart="64dp"
+        android:paddingEnd="64dp"/>
+
+</RelativeLayout>
