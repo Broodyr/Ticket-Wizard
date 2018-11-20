@@ -7,21 +7,20 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
-public class PostEvent extends AppCompatActivity {
+public class ShowEvent extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_event);
+        setContentView(R.layout.activity_show_event);
+
+        TextView desc = findViewById(R.id.desc);
+        desc.setMovementMethod(new ScrollingMovementMethod());
     }
 
     public void back(View view){
         Intent intent = new Intent(this, MainActivity.class);
         finishAfterTransition();
         startActivity(intent);
-    }
-
-    public void upload(View view){
-
     }
 }

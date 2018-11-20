@@ -51,9 +51,9 @@
     <!-- Add/Edit Event Page -->
     <string name="enterEvent">Enter Event Name..</string>
     <string name="addImage">Add Image..</string>
-    <string name="price">Price:</string>
-    <string name="date">Date:</string>
-    <string name="desc">Description:</string>
+    <string name="price">Enter price..</string>
+    <string name="date">Enter date..</string>
+    <string name="desc">Enter description..</string>
     <string name="upload">Upload</string>
     <string name="uploaded">Uploaded!</string>
 

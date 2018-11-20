@@ -29,106 +29,97 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:hint="@string/enterEvent"
+            android:textColorHint="@color/colorLight"
             android:layout_weight="4"
-            android:inputType="text"/>
+            android:inputType="textCapWords"/>
     </LinearLayout>
 
-    <ImageView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"/>
+        android:layout_weight="10"
+        android:layout_margin="8dp"
+        android:text="@string/addImage"
+        android:gravity="center"
+        android:textSize="16pt"
+        android:textStyle="bold"
+        android:textColor="@color/colorLight"
+        android:background="@drawable/paragraph"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.5"
         android:orientation="horizontal">
-        <TextView
+        <EditText
+            android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:translationY="-4dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/paragraph"
+            android:inputType="numberDecimal"
+            android:hint="@string/price"
+            android:textColorHint="@color/colorLight"
             android:textColor="@color/colorLight"
-            android:textSize="12pt"
             android:textAlignment="center"
-            android:layout_weight="1"
-            android:text="$20.00 ea"/>
-        <TextView
+            android:layout_weight="1"/>
+        <EditText
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:translationY="-4dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/paragraph"
+            android:inputType="datetime"
+            android:hint="@string/date"
+            android:textColorHint="@color/colorLight"
             android:textColor="@color/colorLight"
-            android:textSize="12pt"
             android:textAlignment="center"
-            android:layout_weight="1"
-            android:text="Oct. 7"/>
+            android:layout_weight="1"/>
     </LinearLayout>
 
-        <TextView
-            android:id="@+id/paragraph"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:background="@drawable/paragraph">
+        <EditText
+            android:id="@+id/desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:height="128dp"
+            android:hint="@string/desc"
+            android:textColorHint="@color/colorLight"
+            android:inputType="textMultiLine"
             android:textColor="@color/colorLight"
-            android:background="@drawable/paragraph"
             android:padding="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:scrollbars="vertical"
             android:scrollbarTrackVertical="@color/colorDark"
-            android:scrollbarThumbVertical="@color/colorPrimary"
-            android:text="Lorem \nipsum \ndolor \ns\nit\n amet, \nco\ns\nec\ntotur\n alit\n adisa\n seign \nsad \ndo"/>
+            android:scrollbarThumbVertical="@color/colorPrimary" />
+    </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginStart="16dp">
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/simple_button"
-                android:textColor="@color/colorLight"
-                android:textSize="12pt"
-                android:textAlignment="center"
-                android:layout_weight="1"
-                android:text="+"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/simple_button"
-                android:textColor="@color/colorLight"
-                android:textSize="12pt"
-                android:textAlignment="center"
-                android:layout_weight="1"
-                android:text="-"/>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="8"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:background="@drawable/border"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="@color/colorLight"
-            android:textSize="12pt"
-            android:text="1 x $19.99"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_weight="8"
-            android:background="@drawable/simple_button"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="@color/colorLight"
-            android:text="@string/purchase"/>
-    </LinearLayout>
+        android:paddingStart="48dp"
+        android:paddingEnd="48dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/upload"
+        android:textColor="@color/colorLight"
+        android:textAllCaps="false"
+        android:onClick="upload"
+        android:background="@drawable/simple_button"
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>
