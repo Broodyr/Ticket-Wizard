@@ -6,4 +6,44 @@
     tools:context=".Browse"
     android:background="@drawable/bg">
 
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:minHeight="48dp"
+        android:orientation="horizontal"
+        android:background="@color/colorWhite"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:maxHeight="48dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/arrow"
+            android:layout_weight="1"
+            android:onClick="back"
+            android:padding="8dp"/>
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="@string/searchEvent"
+            android:textColorHint="@color/colorDark"
+            android:layout_weight="4"
+            android:inputType="textCapWords"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/topBar">
+        <LinearLayout
+            android:id="@+id/lnr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
 </RelativeLayout>

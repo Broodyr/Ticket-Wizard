@@ -7,6 +7,7 @@
     <string name="search">Search Here..</string>
 
     <!-- Browse Events Page -->
+    <string name="searchEvent">Search for an event..</string>
     <string name="cat">Categories:</string>
     <string-array name="categories">
         <item>Music</item>
@@ -49,13 +50,17 @@
     <string name="thanks">Thank you!\nYour total:</string>
 
     <!-- Add/Edit Event Page -->
-    <string name="enterEvent">Enter Event Name..</string>
-    <string name="addImage">Add Image..</string>
+    <string name="enterEvent">Enter event name..</string>
+    <string name="addImage">Add image..</string>
     <string name="price">Enter price..</string>
     <string name="date">Enter date..</string>
     <string name="desc">Enter description..</string>
     <string name="upload">Upload</string>
     <string name="uploaded">Uploaded!</string>
+    <string name="req">Please fill in all required fields</string>
+    <string name="choose">Please choose a photo</string>
+    <string name="exists">An event with that name already exists!\nPlease choose another name</string>
+    <string name="success">Post created successfully</string>
 
 
 </resources>

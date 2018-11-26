@@ -19,8 +19,6 @@ public class ShowEvent extends AppCompatActivity {
     }
 
     public void back(View view){
-        Intent intent = new Intent(this, MainActivity.class);
-        finishAfterTransition();
-        startActivity(intent);
+        finish();
     }
 }

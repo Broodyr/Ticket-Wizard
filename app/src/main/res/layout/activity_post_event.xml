@@ -12,7 +12,7 @@
         android:layout_height="48dp"
         android:minHeight="48dp"
         android:orientation="horizontal"
-        android:background="@drawable/paragraph">
+        android:background="@color/colorWhite">
 
         <ImageView
             android:id="@+id/back"
@@ -29,23 +29,37 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:hint="@string/enterEvent"
-            android:textColorHint="@color/colorLight"
+            android:textColorHint="@color/colorDark"
             android:layout_weight="4"
             android:inputType="textCapWords"/>
     </LinearLayout>
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
         android:layout_margin="8dp"
-        android:text="@string/addImage"
+        android:layout_weight="10"
         android:gravity="center"
-        android:textSize="16pt"
-        android:textStyle="bold"
-        android:textColor="@color/colorLight"
-        android:background="@drawable/paragraph"
-        />
+        android:background="@drawable/paragraph">
+            <TextView
+                android:id="@+id/addPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:text="@string/addImage"
+                android:gravity="center"
+                android:textSize="16pt"
+                android:textStyle="bold"
+                android:textColor="@color/colorLight"
+            />
+            <ImageView
+                android:id="@+id/photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:onClick="pickImage"/>
+    </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -98,7 +112,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/desc"
             android:textColorHint="@color/colorLight"
-            android:inputType="textMultiLine"
+            android:inputType="textLongMessage"
+            android:singleLine="true"
             android:textColor="@color/colorLight"
             android:padding="8dp"
             android:layout_marginTop="8dp"
