@@ -94,9 +94,6 @@ public class PostEvent extends AppCompatActivity {
                         //gets minutes
                         int minutes = Integer.parseInt(currentSplit[1]);
 
-                        //recombine time
-                        current = currentSplit[0] + ':' + currentSplit[1];
-
                         String timeText = "";
 
                         //checks if time entered is valid
@@ -213,16 +210,18 @@ public class PostEvent extends AppCompatActivity {
         String eName = namet.getText().toString();
         String ePrice = pricet.getText().toString();
         String eDate = datet.getText().toString();
+        String eTime = timet.getText().toString();
         String eDesc = descriptiont.getText().toString();
+
+        Toast.makeText(this, this.getString(R.string.wait), Toast.LENGTH_LONG).show();
 
         //if all of the required fields are filled write the data
         if (eName.length() > 0 && ePrice.length() > 0 && eDate.length() > 0 && eDesc.length() > 0 && photo != null) {
-//        if (1==1) {
             String filePath = "events";
             String fileName = eName.replaceAll(" ", "_") + ".dat";
             String imgPath = "images";
             String imgFileName = eName.replaceAll(" ", "_") + "_img" + ".png";
-            String fileData = eName + '\n' + ePrice + '\n' + eDate + '\n' + eDesc;
+            String fileData = eName + '\n' + ePrice + '\n' + eDate + '\n' + eTime + '\n' + eDesc;
 
             //check if event name already exists
             try {

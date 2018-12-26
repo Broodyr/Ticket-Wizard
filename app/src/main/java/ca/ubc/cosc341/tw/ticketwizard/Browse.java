@@ -14,9 +14,8 @@ import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Browse extends AppCompatActivity {
     int i = 0;
@@ -28,68 +27,63 @@ public class Browse extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse);
 
-        String fileName = "events.dat";
+        String eventPath = "events";
         String imgPath = "images";
-        String line;
 
-        try (FileInputStream fis = openFileInput(fileName);
-             InputStreamReader isr = new InputStreamReader(fis);
-             BufferedReader br = new BufferedReader(isr)) {
-            while ((line = br.readLine()) != null) {
-                data[i] = line;
-                i++;
-            }
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        File eventDir = this.getDir(eventPath, Context.MODE_PRIVATE);
+        File[] dirListing = eventDir.listFiles();
+        File imgDir = this.getDir(imgPath, Context.MODE_PRIVATE);
 
-        LinearLayout ll = findViewById(R.id.lnr);
-        while(y < i && i > 0){
-            String s = data[y];
-            String parsedS[] = s.split("@@@");
-            String name = parsedS[0];
-            String imgFileName = name.replaceAll(" ", "_") + "_img" + ".png";
+        LinearLayout ll = findViewById(R.id.content);
 
-            final LinearLayout lli = new LinearLayout(this);
-            final ImageView iv = new ImageView(this);
-            final TextView tv = new TextView(this);
-
-            lli.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, 400));
-            iv.setLayoutParams(new LinearLayout.LayoutParams(
-                    400, LinearLayout.LayoutParams.MATCH_PARENT));
-            tv.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-
-            try {
-                File imgDir = this.getDir(imgPath, Context.MODE_PRIVATE);
+        if (dirListing != null) {
+            for (File child : dirListing) {
+                String imgFileName = child.getName().replaceAll(".dat", "_img.png");
                 File imgFile = new File(imgDir, imgFileName);
-                Bitmap bm = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                iv.setImageBitmap(bm);
-            } catch (Exception e) {
-                e.printStackTrace();
+                try (BufferedReader br = new BufferedReader(new FileReader(child))) {
+                    //create views for the event info
+                    final LinearLayout lli = new LinearLayout(this);
+                    final ImageView iv = new ImageView(this);
+                    final TextView tv = new TextView(this);
+
+                    //formatting
+                    lli.setPadding(8, 8, 8, 8);
+                    lli.setBottom(8);
+                    tv.setTextColor(this.getColor(R.color.colorLight));
+                    tv.setTextSize(18);
+                    tv.setGravity(Gravity.CENTER);
+                    tv.setTypeface(null, Typeface.BOLD);
+                    iv.setForegroundGravity(Gravity.CENTER);
+                    iv.setPadding(4,4,4,4);
+                    iv.setBackground(this.getDrawable(R.drawable.border));
+
+                    lli.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 400));
+                    iv.setLayoutParams(new LinearLayout.LayoutParams(400, LinearLayout.LayoutParams.MATCH_PARENT));
+                    tv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+
+                    //image
+                    Bitmap bm = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                    iv.setImageBitmap(bm);
+
+                    //event name
+                    tv.setText(br.readLine());
+
+                    //price
+
+                    //date
+
+                    //time
+
+                    //description
+
+                    ll.addView(lli);
+                    lli.addView(iv);
+                    lli.addView(tv);
+
+                } catch (IOException e) {
+                    System.err.print(e);
+                }
             }
-
-            lli.setId(y);
-            lli.setPadding(8, 8, 8, 8);
-            lli.setBottom(8);
-            tv.setText(name);
-            tv.setTextColor(this.getColor(R.color.colorLight));
-            tv.setTextSize(18);
-            tv.setGravity(Gravity.CENTER);
-            tv.setTypeface(null, Typeface.BOLD);
-            iv.setForegroundGravity(Gravity.CENTER);
-            iv.setBackgroundColor(getColor(R.color.colorBlack));
-
-            ll.addView(lli);
-            lli.addView(iv);
-            lli.addView(tv);
-
-            if (y%2 == 0) {
-                lli.setBackgroundColor(getColor(R.color.colorLight));
-                lli.getBackground().setAlpha(128);
-            }
-            y++;
         }
     }
 

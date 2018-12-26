@@ -20,7 +20,7 @@
     <Button
         android:id="@+id/browse"
         android:onClick="browse"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/browse"
         android:layout_below="@+id/title"
@@ -30,14 +30,16 @@
         android:textColor="@color/colorWhite"
         android:textAllCaps="false"
         android:textSize="24sp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
         android:padding="24dp"
-        android:paddingStart="64dp"
-        android:paddingEnd="64dp"/>
+        android:paddingStart="48dp"
+        android:paddingEnd="48dp"/>
 
     <Button
         android:id="@+id/postEvent"
         android:onClick="postEvent"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/postEvent"
         android:layout_below="@id/browse"
@@ -47,8 +49,10 @@
         android:textColor="@color/colorWhite"
         android:textAllCaps="false"
         android:textSize="24sp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
         android:padding="24dp"
-        android:paddingStart="64dp"
-        android:paddingEnd="64dp"/>
+        android:paddingStart="48dp"
+        android:paddingEnd="48dp"/>
 
 </RelativeLayout>

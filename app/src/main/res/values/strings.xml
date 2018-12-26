@@ -54,13 +54,14 @@
     <string name="addImage">Add image..</string>
     <string name="price">Price</string>
     <string name="invPrice">Invalid price format</string>
-    <string name="date">Date (DD/MM/YY)</string>
+    <string name="date">Date [DD/MM/YY]</string>
     <string name="invDate">Invalid date format</string>
-    <string name="time">Time (HH:MM)</string>
+    <string name="time">Time [HH:MM]</string>
     <string name="invTime">Invalid time format</string>
     <string name="desc">Enter description..</string>
     <string name="cancel">Cancel</string>
     <string name="upload">Upload</string>
+    <string name="wait">Please wait..</string>
     <string name="uploaded">Uploaded!</string>
     <string name="req">Please fill in all required fields</string>
     <string name="choose">Please choose a photo</string>
