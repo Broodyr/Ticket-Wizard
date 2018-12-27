@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -43,92 +42,7 @@ public class PostEvent extends AppCompatActivity {
         pricet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                String current = pricet.getText().toString();
-
-                if (current.matches("^\\$?\\d+(.\\d{2})?$")) {
-                    //prevent errors with Free text
-                    if ("Free".equals(current))
-                        pricet.setText("0");
-
-                    if (!hasFocus && !"".equals(current)) {
-                        String priceText = "";
-
-                        //prevents errors caused by dollar sign
-                        if (current.charAt(0) == '$')
-                            current = current.substring(1, current.length());
-
-                        //if price is 0, make it Free, otherwise format decimal
-                        if (Double.parseDouble(current) == 0.0) {
-                            priceText = "Free";
-                        } else {
-                            DecimalFormat df = new DecimalFormat("0.00");
-                            priceText = "$" + df.format(Double.parseDouble(current));
-                        }
-                        pricet.setText(priceText);
-                    }
-                } else if (!"".equals(current)){
-                    Toast.makeText(v.getContext(), v.getContext().getString(R.string.invPrice), Toast.LENGTH_LONG).show();
-                    pricet.setText("");
-                }
-            }
-        });
-
-        //validation and formatting for Time field
-        timet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                String current = timet.getText().toString();
-
-                if (current.matches("[0-2]?[0-9][:][0-5][0-9][A|P]?M?")) {
-                    //split time
-                    String[] currentSplit = current.split(":");
-
-                    //add padding zero for minutes
-                    if (currentSplit[1].length() == 1)
-                        currentSplit[1] = 0 + currentSplit[1];
-
-                    //gets hours
-                    int hours = Integer.parseInt(currentSplit[0]);
-
-                    if (!hasFocus) {
-                        //gets minutes
-                        int minutes = Integer.parseInt(currentSplit[1]);
-
-                        String timeText = "";
-
-                        //checks if time entered is valid
-                        //if valid, convert to AM/PM
-                        if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
-                            Toast.makeText(v.getContext(), v.getContext().getString(R.string.invTime), Toast.LENGTH_LONG).show();
-                        } else if (hours >= 13) {
-                            hours -= 12;
-                            timeText = hours + ":" + currentSplit[1] + "PM";
-                        } else if (hours == 12) {
-                            timeText = hours + ":" + currentSplit[1] + "PM";
-                        } else if (hours == 0) {
-                            hours += 12;
-                            timeText = hours + ":" + currentSplit[1] + "AM";
-                        } else {
-                            timeText = hours + ":" + currentSplit[1] + "AM";
-                        }
-
-                        timet.setText(timeText);
-                    } else { //has focus
-                        //prevents errors caused by AM/PM suffix
-                        String suffix = current.substring(current.length() - 2, current.length());
-                        if ("PM".equals(suffix) && hours != 12) {
-                            hours += 12;
-                            current = hours + current.substring(current.length()-5, current.length());
-                        } else if ("AM".equals(suffix) && hours == 12) {
-                            hours -= 12;
-                            current = hours + current.substring(current.length()-5, current.length());
-                        }
-                            timet.setText(current.substring(0, current.length() - 2));
-                    }
-                } else if (!"".equals(current)) { //if time doesn't match regex format
-                    Toast.makeText(v.getContext(), v.getContext().getString(R.string.invTime), Toast.LENGTH_LONG).show();
-                    timet.setText("");
-                }
+                priceFormat(v, hasFocus);
             }
         });
 
@@ -136,40 +50,17 @@ public class PostEvent extends AppCompatActivity {
         datet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                String current = datet.getText().toString();
-
-                if (current.matches("[0-2]?[0-9][/][0-2]?[0-9][/][0-9]{2}")) {
-                    if (!hasFocus) {
-                        //split date
-                        String[] currentSplit = current.split("/");
-
-                        //add padding zeroes
-                        for (int i = 0; i < 2; ++i)
-                            if (currentSplit[i].length() == 1)
-                                currentSplit[i] = 0 + currentSplit[i];
-
-                        //recombine date
-                        current = currentSplit[0] + '/' + currentSplit[1] + '/' + currentSplit[2];
-
-                        //gets day and month
-                        int day = Integer.parseInt(currentSplit[0]);
-                        int month = Integer.parseInt(currentSplit[1]);
-
-                        //date validation
-                        if (!(day > 0 && day <= 31 && month > 0 && month <= 12)) {
-                            Toast.makeText(v.getContext(), v.getContext().getString(R.string.invDate), Toast.LENGTH_LONG).show();
-                            datet.setText("");
-                        } else {
-                            datet.setText(current);
-                        }
-                    }
-                } else if (!"".equals(current)){ //if date doesn't match regex format
-                    Toast.makeText(v.getContext(), v.getContext().getString(R.string.invDate), Toast.LENGTH_LONG).show();
-                    datet.setText("");
-                }
+                dateFormat(v, hasFocus);
             }
         });
 
+        //validation and formatting for Time field
+        timet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                timeFormat(v, hasFocus);
+            }
+        });
     }
 
     public void pickImage(View view) {
@@ -183,11 +74,9 @@ public class PostEvent extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_EVENT_PHOTO && resultCode == Activity.RESULT_OK) {
-            if (data == null) {
+            if (data == null || data.getData() == null) {
                 Toast.makeText(this, this.getString(R.string.choose), Toast.LENGTH_LONG).show();
-                return;
-            }
-            try (InputStream is = this.getContentResolver().openInputStream(data.getData())){
+            } else try (InputStream is = this.getContentResolver().openInputStream(data.getData())){
                 photo = BitmapFactory.decodeStream(is);
                 Drawable d = new BitmapDrawable(getResources(), photo);
 
@@ -259,5 +148,124 @@ public class PostEvent extends AppCompatActivity {
         //checks if user hasn't filled required fields and tells them using a toast
         else
             Toast.makeText(this, this.getString(R.string.req), Toast.LENGTH_LONG).show();
+    }
+
+    public void priceFormat(View v, boolean hasFocus) {
+        String current = pricet.getText().toString();
+
+        if (current.matches("^\\$?\\d+(.\\d{2})?$")) {
+            //prevent errors with Free text
+            if ("Free".equals(current))
+                pricet.setText("0");
+
+            if (!hasFocus && !"".equals(current)) {
+                String priceText;
+
+                //prevents errors caused by dollar sign
+                if (current.charAt(0) == '$')
+                    current = current.substring(1, current.length());
+
+                //if price is 0, make it Free, otherwise format decimal
+                if (Double.parseDouble(current) == 0.0) {
+                    priceText = "Free";
+                } else {
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    priceText = "$" + df.format(Double.parseDouble(current));
+                }
+                pricet.setText(priceText);
+            }
+        } else if (!"".equals(current)){
+            Toast.makeText(v.getContext(), v.getContext().getString(R.string.invPrice), Toast.LENGTH_LONG).show();
+            pricet.setText("");
+        }
+    }
+
+    public void dateFormat(View v, boolean hasFocus) {
+        String current = datet.getText().toString();
+
+        if (current.matches("[0-2]?[0-9][/][0-2]?[0-9][/][0-9]{2}")) {
+            if (!hasFocus) {
+                //split date
+                String[] currentSplit = current.split("/");
+
+                //add padding zeroes
+                for (int i = 0; i < 2; ++i)
+                    if (currentSplit[i].length() == 1)
+                        currentSplit[i] = 0 + currentSplit[i];
+
+                //recombine date
+                current = currentSplit[0] + '/' + currentSplit[1] + '/' + currentSplit[2];
+
+                //gets day and month
+                int day = Integer.parseInt(currentSplit[0]);
+                int month = Integer.parseInt(currentSplit[1]);
+
+                //date validation
+                if (!(day > 0 && day <= 31 && month > 0 && month <= 12)) {
+                    Toast.makeText(v.getContext(), v.getContext().getString(R.string.invDate), Toast.LENGTH_LONG).show();
+                    datet.setText("");
+                } else {
+                    datet.setText(current);
+                }
+            }
+        } else if (!"".equals(current)){ //if date doesn't match regex format
+            Toast.makeText(v.getContext(), v.getContext().getString(R.string.invDate), Toast.LENGTH_LONG).show();
+            datet.setText("");
+        }
+    }
+
+    public void timeFormat(View v, boolean hasFocus) {
+        String current = timet.getText().toString();
+
+        if (current.matches("[0-2]?[0-9][:][0-5][0-9][A|P]?M?")) {
+            //split time
+            String[] currentSplit = current.split(":");
+
+            //add padding zero for minutes
+            if (currentSplit[1].length() == 1)
+                currentSplit[1] = 0 + currentSplit[1];
+
+            //gets hours
+            int hours = Integer.parseInt(currentSplit[0]);
+
+            if (!hasFocus) {
+                //gets minutes
+                int minutes = Integer.parseInt(currentSplit[1]);
+
+                String timeText = "";
+
+                //checks if time entered is valid
+                //if valid, convert to AM/PM
+                if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+                    Toast.makeText(v.getContext(), v.getContext().getString(R.string.invTime), Toast.LENGTH_LONG).show();
+                } else if (hours >= 13) {
+                    hours -= 12;
+                    timeText = hours + ":" + currentSplit[1] + "PM";
+                } else if (hours == 12) {
+                    timeText = hours + ":" + currentSplit[1] + "PM";
+                } else if (hours == 0) {
+                    hours += 12;
+                    timeText = hours + ":" + currentSplit[1] + "AM";
+                } else {
+                    timeText = hours + ":" + currentSplit[1] + "AM";
+                }
+
+                timet.setText(timeText);
+            } else { //has focus
+                //prevents errors caused by AM/PM suffix
+                String suffix = current.substring(current.length() - 2, current.length());
+                if ("PM".equals(suffix) && hours != 12) {
+                    hours += 12;
+                    current = hours + current.substring(current.length()-5, current.length());
+                } else if ("AM".equals(suffix) && hours == 12) {
+                    hours -= 12;
+                    current = hours + current.substring(current.length()-5, current.length());
+                }
+                timet.setText(current.substring(0, current.length() - 2));
+            }
+        } else if (!"".equals(current)) { //if time doesn't match regex format
+            Toast.makeText(v.getContext(), v.getContext().getString(R.string.invTime), Toast.LENGTH_LONG).show();
+            timet.setText("");
+        }
     }
 }
