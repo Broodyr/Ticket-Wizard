@@ -15,15 +15,30 @@
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/logo_glow"
+        android:contentDescription="@string/app_name"
         android:elevation="2dp"/>
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_centerInParent="true"
+        android:text="@string/welcome"
+        android:textColor="@color/colorLight"
+        android:textSize="32sp"
+        android:textStyle="italic"
+        android:shadowColor="@color/colorBlack"
+        android:shadowRadius="4"
+        android:shadowDy="2"
+        android:shadowDx="2"/>
 
     <Button
         android:id="@+id/browse"
-        android:onClick="browse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/browse"
-        android:layout_below="@+id/title"
+        android:layout_below="@+id/welcome"
         android:layout_marginTop="96dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/button"
@@ -38,7 +53,6 @@
 
     <Button
         android:id="@+id/postEvent"
-        android:onClick="postEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/postEvent"
