@@ -18,15 +18,19 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Browse extends AppCompatActivity {
-    int i = 0;
-    int y = 0;
-    String data[] = new String[100];
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse);
 
+        drawEvents();
+    }
+
+    public void back(View view){
+        finish();
+    }
+
+    public void drawEvents() {
         String eventPath = "events";
         String imgPath = "images";
 
@@ -81,13 +85,9 @@ public class Browse extends AppCompatActivity {
                     lli.addView(tv);
 
                 } catch (IOException e) {
-                    System.err.print(e);
+                    e.printStackTrace();
                 }
             }
         }
-    }
-
-    public void back(View view){
-        finish();
     }
 }
